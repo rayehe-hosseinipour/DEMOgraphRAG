@@ -1,0 +1,7 @@
+unstructured-ingest
+unstructured-ingest[remote]
+python-dotenv
+graphrag_sdk
+networkx
+matplotlib
+google-generativeai
