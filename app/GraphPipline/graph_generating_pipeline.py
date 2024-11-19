@@ -2,7 +2,7 @@ from KnowledgeGraph.Display_graph import GraphVisualizer
 from KnowledgeGraph.generate_knowledge_graph import KnowledgeGraphBuilder
 from Unstructured_IO.Pre_processing import UnstructuredDataProcessor
 from config import conf
-from Utils.helper import clear_output_directory
+from Utils.helper import clear_output_directory , isGraph_exist
 
 class GraphGeneratorPipeline:
     """
@@ -38,13 +38,18 @@ class GraphGeneratorPipeline:
 
         # Step 2: Generate and process the knowledge graph
         print("Step 2: Generating the knowledge graph...")
+        isgraphexist = isGraph_exist(graph_name=self.graph_name)
+        if isgraphexist:
+            if self.reset_graph:
+                isgraphexist.delete()
+                print(f"Graph {self.graph_name} has been reset.")
+            else:
+                print("No graph found to reset.")
         graph_builder = KnowledgeGraphBuilder(
             output_dir=self.output_dir,
             graph_name=self.graph_name,
             boundaries=self.boundaries
         )
-        if self.reset_graph:
-            graph_builder.reset_graph()
         graph_builder.load_sources()
         graph_builder.generate_ontology()
         graph_builder.build_knowledge_graph()

@@ -25,18 +25,7 @@ class KnowledgeGraphBuilder:
         self.boundaries = boundaries
         self.graph_name = graph_name
         self.sources = []  
-        self.graph = ifGraph_exist(self.graph_name) if ifGraph_exist(self.graph_name) else None
         load_dotenv()  
-
-    def reset_graph(self):
-        """
-        Resets the knowledge graph to a clean state.
-        """
-        if self.graph:
-            self.graph.delete()  # Assuming 'clear()' is a method provided by your graph library
-            print(f"Graph {self.graph_name} has been reset.")
-        else:
-            print("No graph found to reset.")
 
     def load_sources(self):
         """
@@ -44,7 +33,17 @@ class KnowledgeGraphBuilder:
         source objects for knowledge graph processing.
         """
         for file in os.listdir(self.output_dir):
-            self.sources.append(Source(os.path.join(self.output_dir, file)))
+            # Check the file extension and adjust if necessary
+            full_path = os.path.join(self.output_dir, file)
+            if file.endswith(".pdf.json"):  # Handle your specific case
+                # Rename to `.json` to correctly reflect its type
+                new_path = full_path.rsplit(".pdf.json", 1)[0] + ".json"
+                os.rename(full_path, new_path)
+                full_path = new_path
+
+            # Add the source object
+            self.sources.append(Source(full_path))
+        
         print(f"Loaded {len(self.sources)} source(s).")
 
     def generate_ontology(self):

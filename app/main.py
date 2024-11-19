@@ -50,7 +50,7 @@ Examples:
     pipeline = gf.GraphGeneratorPipeline(
         input_path="Data/Input",
         output_dir="Data/Output",
-        graph_name="justTest2",
+        graph_name="justTest0",
         boundaries=boundaries
     )
     
