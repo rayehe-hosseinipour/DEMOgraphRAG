@@ -20,11 +20,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY . .
 
-# Set the permissions of the run.sh script to be executable
-RUN chmod +x /app/run.sh
+# Copy the shell script
+COPY start.sh /app/start.sh
+
+# Make the shell script executable
+RUN chmod +x /app/start.sh
 
 # Expose the port
-EXPOSE 5000
+EXPOSE 8000
 
-# Define the entry point to run the shell script
-CMD ["/app/run.sh"]
+# Use the script as the entry point
+CMD ["bash", "-c", "echo 'Starting main_generate' && python -m main_generate && echo 'Starting main_display' && python -m main_display"]
+

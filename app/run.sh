@@ -1,1 +1,0 @@
-python -m main_generate && python -m main_display
