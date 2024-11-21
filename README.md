@@ -26,13 +26,12 @@ This project implements a **Knowledge Graph Generator** using `GraphRAG-SDK` and
 ### Clone the Repository
 ```bash
 git clone <repository-url>
-cd DEMOgraphRAG
+cd DEMOgraphRAG/app
 ```
 
 ### Install Dependencies
 ```bash
 pip install -r requirements.txt
-cd app
 ```
 
 ### Set Environment Variables
@@ -55,7 +54,8 @@ PORTS=<Your FalkorDB PORT>
 1. Place files in the `Data/Input` directory (supported: `.pdf`, `.docx`, `.pptx`).
 2. Generate the Knowledge Graph:
 ```bash
-python -m main.py 
+python -m main_generate.py 
+python -m main_display
 ```
 
 ### Run with Docker
@@ -95,11 +95,15 @@ pytest tests/
 │   │   ├── __init__.py                 
 │   │   └── Pre_processing.py             # Pre-processing of unstructured data
 │   ├── Utils/                            # Utility functions
-│   │    └── helper.py                    # Helper functions used across the app
-│   └── main.py                           # Main script to run the application
+│   ├── helper.py                         # Helper functions used across the app
+│   ├── main_generate.py                  # Main script to generat graph 
+│   ├── mian_display.py                   # Main script to display graph
+│   ├── requirements.txt                  # List of dependencies required to run the project
+│   └── Dockerfile       
+├── docker-compose.yml                    # docker-compose file                            
 ├── .gitignore                            # Git ignore file to exclude certain files from version control
 ├── README.md                             # Readme file for project information and setup
-└── requirements.txt                      # List of dependencies required to run the project
+
 ```
 
 ---

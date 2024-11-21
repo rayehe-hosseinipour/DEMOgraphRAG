@@ -11,7 +11,8 @@ class GraphDisplayPipeline:
     def __init__(self, graph_name: str):
         self.graph_name = graph_name
 
-    def display_graph(self):
+    def display_graph(self , image_dir):
+
         """
         Connects to and displays the knowledge graph.
         """
@@ -23,4 +24,4 @@ class GraphDisplayPipeline:
             password=conf.FALKOR_PASSWORD,
             graph_name=self.graph_name
         )
-        visualizer.display_graph()
+        visualizer.display_graph(image_dir=image_dir , image_name = self.graph_name)
