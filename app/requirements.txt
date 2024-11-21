@@ -5,3 +5,4 @@ graphrag_sdk
 networkx
 matplotlib
 google-generativeai
+unstructured

@@ -9,6 +9,7 @@ from unstructured_ingest.v2.processes.connectors.local import (
     LocalUploaderConfig
 )
 from unstructured_ingest.v2.processes.partitioner import PartitionerConfig
+from unstructured_ingest.v2.processes.chunker import ChunkerConfig
 
 class UnstructuredDataProcessor:
     """
@@ -28,9 +29,14 @@ class UnstructuredDataProcessor:
         """
         Executes the data processing pipeline to convert unstructured data
         into JSON format and store the results in the output directory.
-        """
+        """       
+        chunker_config = ChunkerConfig(
+            chunk_strategy="by_title",  
+            chunk_size=500
+        )
         pipeline = Pipeline.from_configs(
             context=ProcessorConfig(),
+            chunker_config= chunker_config, 
             indexer_config=LocalIndexerConfig(input_path=self.input_path),
             downloader_config=LocalDownloaderConfig(),
             source_connection_config=LocalConnectionConfig(),

@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from falkordb import FalkorDB
-
+import os
 class GraphVisualizer:
     """
     This class connects to the FalkorDB database and visualizes the knowledge graph.
@@ -19,7 +19,7 @@ class GraphVisualizer:
         )
         self.graph_name = graph_name
 
-    def display_graph(self, query: str = "MATCH (n)-[r]->(m) RETURN n, r, m"):
+    def display_graph(self,image_dir,image_name, query: str = "MATCH (n)-[r]->(m) RETURN n, r, m"):
         """
         Displays the knowledge graph by querying the database and rendering it with NetworkX.
 
@@ -60,4 +60,7 @@ class GraphVisualizer:
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
 
         plt.title("Graph Visualization")
+        file_path = os.path.join(image_dir, f'{image_name}.png')
+        plt.savefig(file_path)
+        print(f"Graph saved as {file_path}")
         plt.show()

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app  
+      dockerfile: Dockerfile  
+    volumes:
+      - ./app:/app   # Ensure that this is correct and that 'run.sh' exists
+    ports:
+      - "5000:5000"  # Port mapping, if needed for web service
+    env_file:
+      - ./app/config/.env  # Make sure the .env file exists at this location
+    command: /app/run.sh  # Command to run the shell script

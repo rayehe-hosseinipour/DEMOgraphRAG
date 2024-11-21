@@ -21,7 +21,7 @@ if __name__ == "__main__":
     graph_generator = GraphGeneratorPipeline(
         input_path="Data/Input",
         output_dir="Data/Output",
-        graph_name="justTest1",
+        graph_name="justTest3",
         #reset_graph=True,
         #boundaries=boundaries
     )
